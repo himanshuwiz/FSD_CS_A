@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>flex Layout</title>
+    <style>
+        *{
+            box-sizing: border-box;
+            
+        }
+        .container{
+           display:flex;
+           flex-direction: row;
+           border: 1px solid red;
+           flex-wrap: wrap;
+           justify-content: center;
+        }
+        .header{
+            background-color: aqua;
+            font-size: large;
+            width: 100%;
+            height: 10vh;
+            border: 1px solid blue;
+            text-align: center;
+        }
+        .nav{
+            background-color:black;
+            width: 100%;
+            height: 10vh;
+            border: 1px solid blue;
+            text-align: center;
+        }
+        .left{
+            background-color:antiquewhite;
+            width: 30%;
+            height: 70vh;
+            border: 1px solid blue;
+            text-align: center;
+        }
+        .right{
+            background-color:cadetblue;
+            width: 70%;
+            height: 70vh;
+            border: 1px solid blue;
+            text-align: center;
+        }
+        .footer{
+            background-color:burlywood;
+            width: 100%;
+            height: 10vh;
+            border: 1px solid blue;
+            text-align: center;
+        }
+        div>a{
+            color: white;
+            font-size: medium;
+            text-decoration: none;
+            float: left;
+            padding: 10px 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">ABES ENGINEERING COLLEGE</div>
+        <div class="nav">
+        <a href="#">About Us</a>
+        <a href="#">Contact Us</a>
+        <a href="#">Login</a>
+        <a href="#" style="float: right">Sign Out</a>
+        </div>
+        <div class="left">Link</div>
+        <div class="right">Home</div>
+        <div class="footer">DESIGN AND DEVELOPED BY &copy; FSD Team</div>
+    </div>
+</body>
+</html>
