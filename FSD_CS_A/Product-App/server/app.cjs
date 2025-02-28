@@ -16,13 +16,26 @@ const products = [{
     quantity: 2
 }
 ]
+app.use(express.json())
 app.get("/products", (req, res) => {
     res.status(200);
     res.json(products);
 })
+app.get("/product/:id", (req, res) => {
+    const pid = req.params.id;
+    const index = products.findIndex(ind => ind.id == pid);
+    if (index == -1) {
+        res.status(400).json({ status: "fail", messsage: "product not found" })
+
+    }
+    else {
+        res.status(200).json({ status: "success", messsage: "product found", data: products[index] })
+
+    }
+})
 app.post("/createproduct", (req, res) => {
     const { title, brand, price, quantity } = req.body;
-    if (!title || !brand || !pricce || !quantity) {
+    if (!title || !brand || !price || !quantity) {
         res.status(400).json({ status: "fail", message: "All fields required" })
 
     }
@@ -31,7 +44,45 @@ app.post("/createproduct", (req, res) => {
         const newProduct = {
             id: newID,
             title, brand, price, quantity
+
         }
+        products.push(newProduct);
+        res.status(201).json({ status: "success", message: "product created successfully", newProduct })
+    }
+})
+app.patch("/editproduct/:id", (req, res) => {
+    const pid = req.params.id;
+    const { title, brand, price, quantity } = req.body;
+    if (!title || !brand || !price || !quantity) {
+        res.status(400).json({ status: "fail", message: "All fields required to update" })
+
+    }
+    else {
+        const index = products.findIndex(ind => ind.id == pid);
+        if (index == -1) {
+            res.status(400).json({ status: "fail", messsage: "product not found" })
+
+        }
+        else {
+            products[index].title = title;
+            products[index].brand = brand;
+            products[index].price = price;
+            products[index].quantity = quantity;
+
+            res.status(200).json({ status: "success", message: "product updated successfully", data: products[index] })
+        }
+    }
+})
+app.delete("/deleteprodcut/:id", (req, res) => {
+    const pid = req.params.id;
+    const index = products.findIndex(ind => ind.id == pid);
+    if (index == -1) {
+        res.status(400).json({ status: "fail", messsage: "product not found" })
+
+    }
+    else {
+        const a = products.splice(index, 1);
+        res.status(200).json({ status: "success", message: "product deleted successfully", data: a })
     }
 })
 app.listen(port, (err) => {
